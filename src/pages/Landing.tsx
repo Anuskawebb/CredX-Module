@@ -203,9 +203,9 @@ const Landing: React.FC = () => {
               transform: launchPressed ? 'scale(0.95)' : 'scale(1)',
               transition: 'transform 0.15s cubic-bezier(.4,2,.6,1), box-shadow 0.2s',
               boxShadow: launchPressed
-                ? '0 0 0 4px rgba(255,126,95,0.15), 0 2px 16px rgba(162,89,255,0.15)'
+                ? '0 0 0 4px rgba(255,126,95,0.10), 0 2px 8px rgba(162,89,255,0.10)'
                 : launchHover
-                ? '0 0 8px 2px #ff7e5f, 0 2px 8px 2px #a259ff'
+                ? '0 0 4px 1px #ff7e5f, 0 2px 4px 1px #a259ff'
                 : '0 2px 8px rgba(162,89,255,0.10)',
             }}
           >
