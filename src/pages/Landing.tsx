@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ChevronRight, Shield, CreditCard, Zap, TrendingUp, Users, Lock } from 'lucide-react';
 import AnimatedBackground from '../components/AnimatedBackground';
@@ -8,6 +8,8 @@ import TypewriterText from '../components/TypewriterText';
 import CreditCardAnimation from '../components/CreditCardAnimation';
 
 const Landing: React.FC = () => {
+  const navigate = useNavigate();
+
   const features = [
     {
       icon: Shield,
@@ -69,88 +71,82 @@ const Landing: React.FC = () => {
     }
   ];
 
-  const handleScrollToHowItWorks = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    const element = document.getElementById('how-it-works');
-    if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
+  const handleLaunchApp = () => {
+    navigate('/dashboard');
   };
 
   return (
     <div className="min-h-screen bg-black text-white relative">
       <AnimatedBackground />
       
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 z-10">
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+      {/* Hero Section with extra spacing above and below */}
+      <section
+        className="hero-section"
+        style={{
+          minHeight: '60vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+          paddingTop: '80px',
+          marginBottom: '120px',
+        }}
+      >
+        <div style={{ height: '40px' }} />
+        <h1
+          style={{
+            fontSize: '3rem',
+            fontWeight: 'bold',
+            background: 'linear-gradient(90deg, #ff7e5f, #feb47b, #a259ff)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            marginBottom: '1rem',
+          }}
+        >
+          CredX
+        </h1>
+        <h2 style={{ fontSize: '2.25rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' }}>
+          Borrow Crypto. Spend IRL.
+        </h2>
+        <p style={{ fontSize: '1.25rem', color: '#e5e7eb', marginBottom: '2rem', maxWidth: 600 }}>
+          Use your crypto reputation and tokens to borrow USDC and spend with MetaMask Card.
+        </p>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '80px' }}>
+          <button
+            onClick={handleLaunchApp}
+            style={{
+              padding: '0.75rem 1.5rem',
+              background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '0.5rem',
+              cursor: 'pointer',
+              fontSize: '1rem',
+              fontWeight: 'bold',
+            }}
           >
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-neon-orange via-neon-purple to-neon-glow bg-clip-text text-transparent">
-                CredX
-              </span>
-            </h1>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-              Borrow Crypto. Spend IRL.
-            </h2>
-            
-            {/* Typewriter Animation */}
-            <div className="mb-8 max-w-3xl mx-auto">
-              <TypewriterText
-                text="Use your crypto reputation and tokens to borrow USDC and spend with MetaMask Card."
-                delay={40}
-                className="text-xl text-gray-300"
-              />
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-20"
+            Launch App
+          </button>
+          <button
+            onClick={() => {
+              const el = document.getElementById('how-it-works');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
+            style={{
+              padding: '0.75rem 1.5rem',
+              background: 'rgba(255,255,255,0.05)',
+              color: '#fff',
+              border: '1px solid #a259ff',
+              borderRadius: '0.5rem',
+              cursor: 'pointer',
+              fontSize: '1rem',
+              fontWeight: 'bold',
+            }}
           >
-            <Link 
-              to="/dashboard" 
-              className="inline-block relative z-30"
-              style={{ pointerEvents: 'auto' }}
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label="Launch CredX Application"
-                className="bg-gradient-to-r from-neon-orange to-neon-purple px-8 py-4 rounded-lg font-semibold text-white hover:shadow-lg hover:shadow-neon-glow/25 transition-all flex items-center space-x-2 cursor-pointer"
-                style={{ pointerEvents: 'auto' }}
-              >
-                <span>Launch App</span>
-                <ChevronRight className="w-5 h-5" />
-              </motion.button>
-            </Link>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleScrollToHowItWorks}
-              aria-label="Scroll to How It Works section"
-              className="border border-glass-white px-8 py-4 rounded-lg font-semibold text-white hover:bg-glass-white hover:shadow-lg hover:shadow-neon-glow/15 transition-all cursor-pointer relative z-30"
-              style={{ pointerEvents: 'auto' }}
-            >
-              How It Works
-            </motion.button>
-          </motion.div>
+            How it works
+          </button>
         </div>
-
-        {/* Subtle background glow behind text */}
-        <div className="absolute inset-0 bg-gradient-to-r from-neon-orange/5 via-neon-purple/5 to-neon-glow/5 blur-3xl -z-10" />
       </section>
 
       {/* 3D Credit Card Animation Section */}

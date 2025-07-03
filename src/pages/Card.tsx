@@ -4,6 +4,13 @@ import { CreditCard, Smartphone, ShoppingBag, Coffee, Plane, Tv } from 'lucide-r
 import AnimatedBackground from '../components/AnimatedBackground';
 import { mockVaultData } from '../hooks/useContract';
 
+const gradientStyle = {
+  background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  display: 'inline-block'
+};
+
 const Card: React.FC = () => {
   const recentTransactions = [
     { id: '1', merchant: 'Starbucks Coffee', amount: '$12.50', category: 'Food & Drink', icon: Coffee, date: '2 hours ago' },
@@ -30,7 +37,12 @@ const Card: React.FC = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">MetaMask Card</h1>
+            <h1
+              className="text-3xl font-bold mb-2"
+              style={gradientStyle}
+            >
+              MetaMask Card
+            </h1>
             <p className="text-gray-400">
               Spend your borrowed USDC anywhere with the MetaMask Card
             </p>
@@ -46,7 +58,7 @@ const Card: React.FC = () => {
             >
               <div className="bg-glass-dark/50 backdrop-blur-md border border-glass-white rounded-xl p-6 mb-8">
                 <h2 className="text-xl font-semibold mb-6 flex items-center space-x-2">
-                  <CreditCard className="w-5 h-5 text-neon-blue" />
+                  <CreditCard className="w-5 h-5" style={gradientStyle} />
                   <span>Virtual Card</span>
                 </h2>
 
@@ -106,8 +118,12 @@ const Card: React.FC = () => {
                       className="flex items-center justify-between p-4 bg-glass-dark/30 rounded-lg hover:bg-glass-dark/50 transition-colors"
                     >
                       <div className="flex items-center space-x-3">
-                        <div className="p-2 bg-neon-blue/20 rounded-lg">
-                          <transaction.icon className="w-5 h-5 text-neon-blue" />
+                        <div className="p-2 rounded-lg"
+                          style={{
+                            background: 'linear-gradient(90deg, #ff7e5f, #a259ff, #ff7e5f)',
+                          }}
+                        >
+                          <transaction.icon className="w-5 h-5" style={gradientStyle} />
                         </div>
                         <div>
                           <div className="text-white font-medium">{transaction.merchant}</div>
@@ -140,7 +156,10 @@ const Card: React.FC = () => {
                       </div>
                       <div className="w-full bg-gray-700 rounded-full h-2">
                         <motion.div
-                          className={`bg-gradient-to-r from-${category.color} to-${category.color}/80 h-2 rounded-full`}
+                          className={`h-2 rounded-full`}
+                          style={{
+                            background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+                          }}
                           initial={{ width: 0 }}
                           animate={{ width: `${category.percentage}%` }}
                           transition={{ duration: 1, delay: index * 0.2 }}
@@ -158,7 +177,16 @@ const Card: React.FC = () => {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-gradient-to-r from-neon-blue to-neon-purple p-3 rounded-lg text-white font-semibold hover:shadow-lg hover:shadow-neon-blue/25 transition-all"
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem 1.5rem',
+                      borderRadius: '0.5rem',
+                      fontWeight: 600,
+                      background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+                      color: 'white',
+                      boxShadow: '0 2px 16px rgba(162,89,255,0.15)',
+                      marginBottom: '0.5rem'
+                    }}
                   >
                     Add Funds
                   </motion.button>
@@ -183,14 +211,23 @@ const Card: React.FC = () => {
 
               <div className="bg-neon-cyan/10 border border-neon-cyan/30 rounded-xl p-4">
                 <div className="text-center">
-                  <CreditCard className="w-8 h-8 text-neon-cyan mx-auto mb-2" />
+                  <CreditCard className="w-8 h-8 mx-auto mb-2" style={gradientStyle} />
                   <p className="text-white font-medium mb-1">Physical Card</p>
                   <p className="text-gray-300 text-sm">
                     Order your physical MetaMask Card for worldwide spending
                   </p>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
-                    className="mt-3 text-neon-cyan font-semibold text-sm hover:text-neon-blue transition-colors"
+                    style={{
+                      marginTop: '0.75rem',
+                      background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      fontWeight: 600,
+                      border: 'none',
+                      fontSize: '1rem',
+                      cursor: 'pointer'
+                    }}
                   >
                     Request Physical Card →
                   </motion.button>

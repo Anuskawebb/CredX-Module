@@ -4,6 +4,13 @@ import { DollarSign, Clock, AlertTriangle } from 'lucide-react';
 import AnimatedBackground from '../components/AnimatedBackground';
 import { mockVaultData } from '../hooks/useContract';
 
+const gradientStyle = {
+  background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  display: 'inline-block'
+};
+
 const Repay: React.FC = () => {
   const [repayAmount, setRepayAmount] = useState('');
   const outstandingBalance = parseFloat(mockVaultData.borrowed.replace(',', ''));
@@ -25,7 +32,12 @@ const Repay: React.FC = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Repay Loan</h1>
+            <h1
+              className="text-3xl font-bold mb-2"
+              style={gradientStyle}
+            >
+              Repay Loan
+            </h1>
             <p className="text-gray-400">
               Repay your USDC loan to reduce debt and improve credit score
             </p>
@@ -40,7 +52,7 @@ const Repay: React.FC = () => {
               className="bg-glass-dark/50 backdrop-blur-md border border-glass-white rounded-xl p-6"
             >
               <h2 className="text-xl font-semibold mb-6 flex items-center space-x-2">
-                <DollarSign className="w-5 h-5 text-neon-cyan" />
+                <DollarSign className="w-5 h-5" style={gradientStyle} />
                 <span>Loan Repayment</span>
               </h2>
 
@@ -48,7 +60,7 @@ const Repay: React.FC = () => {
                 <div className="bg-glass-dark/30 rounded-lg p-4 border border-neon-purple/30">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-gray-300">Outstanding Balance</span>
-                    <span className="text-2xl font-bold text-neon-purple">
+                    <span className="text-2xl font-bold" style={gradientStyle}>
                       ${mockVaultData.borrowed}
                     </span>
                   </div>
@@ -64,7 +76,14 @@ const Repay: React.FC = () => {
                     </label>
                     <button
                       onClick={() => setRepayAmount(mockVaultData.borrowed)}
-                      className="text-sm text-neon-cyan hover:text-neon-blue transition-colors"
+                      style={{
+                        ...gradientStyle,
+                        fontSize: '0.95rem',
+                        background: 'none',
+                        border: 'none',
+                        padding: 0,
+                        cursor: 'pointer'
+                      }}
                     >
                       Max
                     </button>
@@ -82,12 +101,12 @@ const Repay: React.FC = () => {
                   <div className="bg-glass-dark/30 rounded-lg p-4">
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-gray-300">New Balance</span>
-                      <span className="text-xl font-bold text-white">
+                      <span className="text-xl font-bold" style={gradientStyle}>
                         ${newBalance.toLocaleString()}
                       </span>
                     </div>
                     {newBalance === 0 && (
-                      <div className="text-sm text-neon-cyan">
+                      <div className="text-sm" style={gradientStyle}>
                         ✓ Loan will be fully repaid
                       </div>
                     )}
@@ -115,7 +134,18 @@ const Repay: React.FC = () => {
                   whileTap={{ scale: 0.98 }}
                   onClick={handleRepay}
                   disabled={!repayAmount || parseFloat(repayAmount) <= 0}
-                  className="w-full bg-gradient-to-r from-neon-cyan to-neon-blue p-4 rounded-lg text-white font-semibold hover:shadow-lg hover:shadow-neon-cyan/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{
+                    width: '100%',
+                    padding: '1rem',
+                    borderRadius: '0.5rem',
+                    fontWeight: 600,
+                    background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+                    color: 'white',
+                    boxShadow: '0 2px 16px rgba(162,89,255,0.15)',
+                    opacity: !repayAmount || parseFloat(repayAmount) <= 0 ? 0.5 : 1,
+                    cursor: !repayAmount || parseFloat(repayAmount) <= 0 ? 'not-allowed' : 'pointer',
+                    marginTop: '1rem'
+                  }}
                 >
                   Repay Now
                 </motion.button>
@@ -131,7 +161,7 @@ const Repay: React.FC = () => {
             >
               <div className="bg-glass-dark/50 backdrop-blur-md border border-glass-white rounded-xl p-6">
                 <h3 className="text-lg font-semibold mb-4 flex items-center space-x-2">
-                  <Clock className="w-5 h-5 text-neon-purple" />
+                  <Clock className="w-5 h-5" style={gradientStyle} />
                   <span>Payment Schedule</span>
                 </h3>
                 
@@ -156,7 +186,7 @@ const Repay: React.FC = () => {
               </div>
 
               <div className="bg-glass-dark/50 backdrop-blur-md border border-glass-white rounded-xl p-6">
-                <h3 className="text-lg font-semibold mb-4">Credit Impact</h3>
+                <h3 className="text-lg font-semibold mb-4" style={gradientStyle}>Credit Impact</h3>
                 
                 <div className="space-y-4">
                   <div className="flex justify-between">
@@ -167,7 +197,7 @@ const Repay: React.FC = () => {
                   {repayAmount && parseFloat(repayAmount) > 0 && (
                     <div className="flex justify-between">
                       <span className="text-gray-400">Projected Score</span>
-                      <span className="text-neon-cyan font-semibold">
+                      <span style={gradientStyle} className="font-semibold">
                         +{Math.floor(parseFloat(repayAmount) / 100)} pts
                       </span>
                     </div>
@@ -181,7 +211,7 @@ const Repay: React.FC = () => {
 
               <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4">
                 <div className="flex items-start space-x-3">
-                  <AlertTriangle className="w-5 h-5 text-yellow-500 mt-0.5" />
+                  <AlertTriangle className="w-5 h-5" style={gradientStyle} />
                   <div className="text-sm">
                     <p className="text-white font-medium mb-1">Payment Reminder</p>
                     <p className="text-gray-300">

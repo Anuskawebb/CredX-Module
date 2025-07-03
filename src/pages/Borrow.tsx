@@ -27,7 +27,14 @@ const Borrow: React.FC = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Borrow USDC</h1>
+            <h1 className="text-3xl font-bold mb-2"
+                style={{
+                  background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  display: 'inline-block'
+                }}
+            >Borrow USDC</h1>
             <p className="text-gray-400">
               Deposit collateral and borrow USDC at 70% LTV ratio
             </p>
@@ -42,7 +49,13 @@ const Borrow: React.FC = () => {
               className="bg-glass-dark/50 backdrop-blur-md border border-glass-white rounded-xl p-6"
             >
               <h2 className="text-xl font-semibold mb-6 flex items-center space-x-2">
-                <Calculator className="w-5 h-5 text-neon-blue" />
+                <Calculator className="w-5 h-5"
+                  style={{
+                    background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent'
+                  }}
+                />
                 <span>Collateral & Borrowing</span>
               </h2>
 
@@ -97,7 +110,18 @@ const Borrow: React.FC = () => {
                   whileTap={{ scale: 0.98 }}
                   onClick={handleBorrow}
                   disabled={!collateralAmount || parseFloat(collateralAmount) <= 0}
-                  className="w-full bg-gradient-to-r from-neon-blue to-neon-purple p-4 rounded-lg text-white font-semibold hover:shadow-lg hover:shadow-neon-blue/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{
+                    width: '100%',
+                    padding: '1rem',
+                    borderRadius: '0.5rem',
+                    fontWeight: 600,
+                    background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+                    color: 'white',
+                    boxShadow: '0 2px 16px rgba(162,89,255,0.15)',
+                    opacity: !collateralAmount || parseFloat(collateralAmount) <= 0 ? 0.5 : 1,
+                    cursor: !collateralAmount || parseFloat(collateralAmount) <= 0 ? 'not-allowed' : 'pointer',
+                    marginTop: '1rem'
+                  }}
                 >
                   Deposit & Borrow
                 </motion.button>
@@ -113,7 +137,13 @@ const Borrow: React.FC = () => {
             >
               <div className="bg-glass-dark/50 backdrop-blur-md border border-glass-white rounded-xl p-6">
                 <h3 className="text-lg font-semibold mb-4 flex items-center space-x-2">
-                  <Info className="w-5 h-5 text-neon-cyan" />
+                  <Info className="w-5 h-5"
+                    style={{
+                      background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent'
+                    }}
+                  />
                   <span>Borrowing Details</span>
                 </h3>
                 
@@ -139,7 +169,13 @@ const Borrow: React.FC = () => {
 
               <div className="bg-glass-dark/50 backdrop-blur-md border border-glass-white rounded-xl p-6">
                 <h3 className="text-lg font-semibold mb-4 flex items-center space-x-2">
-                  <TrendingUp className="w-5 h-5 text-neon-purple" />
+                  <TrendingUp className="w-5 h-5"
+                    style={{
+                      background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent'
+                    }}
+                  />
                   <span>Your Credit Profile</span>
                 </h3>
                 
@@ -162,7 +198,13 @@ const Borrow: React.FC = () => {
 
               <div className="bg-neon-blue/10 border border-neon-blue/30 rounded-xl p-4">
                 <div className="flex items-start space-x-3">
-                  <Info className="w-5 h-5 text-neon-blue mt-0.5" />
+                  <Info className="w-5 h-5"
+                    style={{
+                      background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent'
+                    }}
+                  />
                   <div className="text-sm">
                     <p className="text-white font-medium mb-1">Risk Warning</p>
                     <p className="text-gray-300">

@@ -6,6 +6,13 @@ import AnimatedBackground from '../components/AnimatedBackground';
 import VaultCard from '../components/VaultCard';
 import { mockVaultData } from '../hooks/useContract';
 
+const gradientStyle = {
+  background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  display: 'inline-block'
+};
+
 const Dashboard: React.FC = () => {
   const { address, isConnected } = useAccount();
 
@@ -28,28 +35,28 @@ const Dashboard: React.FC = () => {
       title: 'Available to Borrow',
       value: '$3,850',
       icon: DollarSign,
-      color: 'neon-blue',
+      color: gradientStyle,
       change: '+12.5%'
     },
     {
       title: 'Card Balance',
       value: `$${mockVaultData.cardBalance}`,
       icon: CreditCard,
-      color: 'neon-purple',
+      color: gradientStyle,
       change: '-$89.50'
     },
     {
       title: 'ZK Credit Score',
       value: mockVaultData.zkScore.toString(),
       icon: TrendingUp,
-      color: 'neon-cyan',
+      color: gradientStyle,
       change: '+25 pts'
     },
     {
       title: 'Next Payment',
       value: '12 days',
       icon: Clock,
-      color: 'neon-pink',
+      color: gradientStyle,
       change: 'Due Jan 15'
     }
   ];
@@ -65,7 +72,7 @@ const Dashboard: React.FC = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
+            <h1 className="text-3xl font-bold mb-2" style={gradientStyle}>Dashboard</h1>
             <p className="text-gray-400">
               Welcome back, {address?.slice(0, 6)}...{address?.slice(-4)}
             </p>
@@ -83,11 +90,11 @@ const Dashboard: React.FC = () => {
                 className="bg-glass-dark/50 backdrop-blur-md border border-glass-white rounded-xl p-6 hover:border-neon-blue/50 transition-all duration-300"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <card.icon className={`w-8 h-8 text-${card.color}`} />
+                  <card.icon className="w-8 h-8" style={gradientStyle} />
                   <span className="text-sm text-gray-400">{card.change}</span>
                 </div>
                 <h3 className="text-lg font-semibold text-white mb-1">{card.title}</h3>
-                <p className={`text-2xl font-bold text-${card.color}`}>{card.value}</p>
+                <p className="text-2xl font-bold" style={gradientStyle}>{card.value}</p>
               </motion.div>
             ))}
           </div>
@@ -116,21 +123,45 @@ const Dashboard: React.FC = () => {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full bg-gradient-to-r from-neon-blue to-neon-purple p-4 rounded-lg text-white font-semibold hover:shadow-lg hover:shadow-neon-blue/25 transition-all"
+                  style={{
+                    width: '100%',
+                    padding: '1rem',
+                    borderRadius: '0.5rem',
+                    fontWeight: 600,
+                    background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+                    color: 'white',
+                    boxShadow: '0 2px 16px rgba(162,89,255,0.15)'
+                  }}
                 >
                   Borrow More USDC
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full border border-neon-cyan text-neon-cyan p-4 rounded-lg font-semibold hover:bg-neon-cyan/10 transition-all"
+                  style={{
+                    width: '100%',
+                    padding: '1rem',
+                    borderRadius: '0.5rem',
+                    fontWeight: 600,
+                    background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+                    color: 'white',
+                    boxShadow: '0 2px 16px rgba(162,89,255,0.15)'
+                  }}
                 >
                   Repay Loan
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full border border-glass-white text-white p-4 rounded-lg font-semibold hover:bg-glass-white transition-all"
+                  style={{
+                    width: '100%',
+                    padding: '1rem',
+                    borderRadius: '0.5rem',
+                    fontWeight: 600,
+                    background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+                    color: 'white',
+                    boxShadow: '0 2px 16px rgba(162,89,255,0.15)'
+                  }}
                 >
                   Add Collateral
                 </motion.button>
