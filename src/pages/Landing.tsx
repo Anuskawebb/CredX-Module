@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ChevronRight, Shield, CreditCard, Zap, TrendingUp, Users, Lock } from 'lucide-react';
@@ -6,9 +6,16 @@ import AnimatedBackground from '../components/AnimatedBackground';
 import Footer from '../components/Footer';
 import TypewriterText from '../components/TypewriterText';
 import CreditCardAnimation from '../components/CreditCardAnimation';
+import glowingFox from '../assets/glowingFox-removebg-preview.png';
 
 const Landing: React.FC = () => {
   const navigate = useNavigate();
+
+  // Animation state for buttons
+  const [launchPressed, setLaunchPressed] = useState(false);
+  const [howPressed, setHowPressed] = useState(false);
+  const [launchHover, setLaunchHover] = useState(false);
+  const [howHover, setHowHover] = useState(false);
 
   const features = [
     {
@@ -72,13 +79,88 @@ const Landing: React.FC = () => {
   ];
 
   const handleLaunchApp = () => {
-    navigate('/dashboard');
+    setLaunchPressed(true);
+    setTimeout(() => {
+      setLaunchPressed(false);
+      navigate('/dashboard');
+    }, 150);
+  };
+
+  const handleHowItWorks = () => {
+    setHowPressed(true);
+    setTimeout(() => {
+      setHowPressed(false);
+      const el = document.getElementById('how-it-works');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 150);
   };
 
   return (
     <div className="min-h-screen bg-black text-white relative">
       <AnimatedBackground />
       
+      {/* Logo and "CredX" at top left of hero section, with a tiny gap */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 32,
+          left: 32,
+          zIndex: 20,
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <div style={{ position: 'relative', height: '96px', width: '96px' }}>
+          <img
+            src={glowingFox}
+            alt="CredX Fox Logo"
+            style={{
+              height: '96px',
+              width: '96px',
+              objectFit: 'contain',
+              filter: 'drop-shadow(0 0 16px #ff7e5f)',
+              background: 'transparent',
+              borderRadius: '16px',
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              zIndex: 1,
+              pointerEvents: 'none',
+            }}
+            draggable={false}
+          />
+          <span
+            style={{
+              position: 'absolute',
+              left: '68px', // Tiny gap
+              top: '50%',
+              transform: 'translateY(-50%)',
+              fontSize: '1.5rem',
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+              display: 'inline-block',
+              userSelect: 'none',
+              lineHeight: 1,
+              padding: 0,
+              zIndex: 2,
+              pointerEvents: 'none',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            <span style={{ color: '#fff' }}>Cred</span>
+            <span
+              style={{
+                background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
+              X
+            </span>
+          </span>
+        </div>
+      </div>
+
       {/* Hero Section with extra spacing above and below */}
       <section
         className="hero-section"
@@ -91,23 +173,12 @@ const Landing: React.FC = () => {
           textAlign: 'center',
           paddingTop: '80px',
           marginBottom: '120px',
+          position: 'relative',
         }}
       >
         <div style={{ height: '40px' }} />
-        <h1
-          style={{
-            fontSize: '3rem',
-            fontWeight: 'bold',
-            background: 'linear-gradient(90deg, #ff7e5f, #feb47b, #a259ff)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            marginBottom: '1rem',
-          }}
-        >
-          CredX
-        </h1>
         <h2 style={{ fontSize: '2.25rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' }}>
-          Borrow Crypto. Spend IRL.
+          <TypewriterText text="Borrow Crypto. Spend IRL." speed={20} />
         </h2>
         <p style={{ fontSize: '1.25rem', color: '#e5e7eb', marginBottom: '2rem', maxWidth: 600 }}>
           Use your crypto reputation and tokens to borrow USDC and spend with MetaMask Card.
@@ -115,6 +186,11 @@ const Landing: React.FC = () => {
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '80px' }}>
           <button
             onClick={handleLaunchApp}
+            onMouseDown={() => setLaunchPressed(true)}
+            onMouseUp={() => setLaunchPressed(false)}
+            onMouseLeave={() => setLaunchPressed(false)}
+            onMouseEnter={() => setLaunchHover(true)}
+            onMouseLeave={() => setLaunchHover(false)}
             style={{
               padding: '0.75rem 1.5rem',
               background: 'linear-gradient(90deg, #ff7e5f, #a259ff)',
@@ -124,15 +200,24 @@ const Landing: React.FC = () => {
               cursor: 'pointer',
               fontSize: '1rem',
               fontWeight: 'bold',
+              transform: launchPressed ? 'scale(0.95)' : 'scale(1)',
+              transition: 'transform 0.15s cubic-bezier(.4,2,.6,1), box-shadow 0.2s',
+              boxShadow: launchPressed
+                ? '0 0 0 4px rgba(255,126,95,0.15), 0 2px 16px rgba(162,89,255,0.15)'
+                : launchHover
+                ? '0 0 8px 2px #ff7e5f, 0 2px 8px 2px #a259ff'
+                : '0 2px 8px rgba(162,89,255,0.10)',
             }}
           >
             Launch App
           </button>
           <button
-            onClick={() => {
-              const el = document.getElementById('how-it-works');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }}
+            onClick={handleHowItWorks}
+            onMouseDown={() => setHowPressed(true)}
+            onMouseUp={() => setHowPressed(false)}
+            onMouseLeave={() => setHowPressed(false)}
+            onMouseEnter={() => setHowHover(true)}
+            onMouseLeave={() => setHowHover(false)}
             style={{
               padding: '0.75rem 1.5rem',
               background: 'rgba(255,255,255,0.05)',
@@ -142,6 +227,13 @@ const Landing: React.FC = () => {
               cursor: 'pointer',
               fontSize: '1rem',
               fontWeight: 'bold',
+              transform: howPressed ? 'scale(0.95)' : 'scale(1)',
+              transition: 'transform 0.15s cubic-bezier(.4,2,.6,1), box-shadow 0.2s',
+              boxShadow: howPressed
+                ? '0 0 0 4px rgba(162,89,255,0.15), 0 2px 8px rgba(162,89,255,0.10)'
+                : howHover
+                ? '0 0 8px 2px #a259ff, 0 2px 8px 2px #ff7e5f'
+                : '0 2px 8px rgba(162,89,255,0.10)',
             }}
           >
             How it works

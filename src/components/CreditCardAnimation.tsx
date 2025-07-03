@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import mCard from '../assets/Mcard-removebg-preview.png'; // Import your new card image
 
 const CreditCardAnimation: React.FC = () => {
   const { scrollYProgress } = useScroll();
@@ -15,67 +16,55 @@ const CreditCardAnimation: React.FC = () => {
   const rightCardExitY = useTransform(scrollYProgress, [0.5, 0.7], [0, -200]);
   const cardsOpacity = useTransform(scrollYProgress, [0.6, 0.75], [1, 0]);
 
-  const MetaMaskCard: React.FC<{ 
-    style: any; 
-    className?: string; 
-  }> = ({ style, className = "" }) => (
-    <motion.div
-      style={style}
-      whileHover={{ 
-        scale: 1.05, 
-        rotateY: 10,
-        transition: { duration: 0.3 }
+  const Card3D = () => (
+    <div
+      style={{
+        width: '360px',
+        height: '220px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        overflow: 'visible',
+        background: 'transparent',
+        padding: 0,
+        margin: 0,
+        boxShadow: 'none',
       }}
-      className={`relative w-80 sm:w-96 h-48 sm:h-56 rounded-2xl overflow-hidden shadow-2xl group ${className}`}
     >
-      {/* Enhanced background glow from edges */}
-      <div className="absolute -inset-8 opacity-70 group-hover:opacity-90 transition-opacity duration-300 pointer-events-none">
-        {/* Edge glows */}
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-40 h-12 bg-gradient-to-b from-neon-orange/60 to-transparent blur-xl" />
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-40 h-12 bg-gradient-to-t from-neon-purple/60 to-transparent blur-xl" />
-        <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-12 h-40 bg-gradient-to-r from-neon-glow/60 to-transparent blur-xl" />
-        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-12 h-40 bg-gradient-to-l from-neon-orange/60 to-transparent blur-xl" />
-        
-        {/* Corner glows */}
-        <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-radial from-neon-orange/70 via-neon-orange/30 to-transparent rounded-full blur-2xl" />
-        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-radial from-neon-purple/70 via-neon-purple/30 to-transparent rounded-full blur-2xl" />
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-radial from-neon-glow/70 via-neon-glow/30 to-transparent rounded-full blur-2xl" />
-        <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-radial from-neon-purple/70 via-neon-purple/30 to-transparent rounded-full blur-2xl" />
-      </div>
-      
-      {/* Main card container */}
-      <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden">
-        {/* Card border glow */}
-        <div className="absolute -inset-1 bg-gradient-to-r from-neon-orange/60 via-neon-purple/60 to-neon-glow/60 rounded-2xl blur-sm opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
-        
-        {/* MetaMask Card Image - Rotated to horizontal */}
-        <div className="relative z-20 w-full h-full rounded-2xl overflow-hidden bg-transparent">
-          <img 
-            src="/src/assets/MetamasterCard.webp" 
-            alt="MetaMask Card"
-            className="w-full h-full object-cover rounded-2xl transform rotate-90 scale-125"
-            style={{
-              filter: 'drop-shadow(0 0 20px rgba(231, 111, 81, 0.6)) drop-shadow(0 0 40px rgba(123, 44, 191, 0.5))',
-              imageRendering: 'crisp-edges'
-            }}
-          />
-        </div>
-        
-        {/* Glass overlay for holographic effect */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent rounded-2xl z-30" />
-        
-        {/* Hover enhancement glow */}
-        <div className="absolute inset-0 bg-gradient-to-br from-neon-glow/0 via-neon-glow/20 to-neon-glow/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30" />
-        
-        {/* Corner accent glows on hover */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
-          <div className="absolute top-4 left-4 w-4 h-4 bg-neon-orange/90 rounded-full blur-sm animate-pulse" />
-          <div className="absolute top-4 right-4 w-4 h-4 bg-neon-purple/90 rounded-full blur-sm animate-pulse" />
-          <div className="absolute bottom-4 left-4 w-4 h-4 bg-neon-glow/90 rounded-full blur-sm animate-pulse" />
-          <div className="absolute bottom-4 right-4 w-4 h-4 bg-neon-purple/90 rounded-full blur-sm animate-pulse" />
-        </div>
-      </div>
-    </motion.div>
+      {/* Glowing border */}
+      {/* <div
+        style={{
+          position: 'absolute',
+          top: '-16px',
+          left: '-16px',
+          width: 'calc(100% + 32px)',
+          height: 'calc(100% + 32px)',
+          borderRadius: '28px',
+          boxShadow: '0 0 32px 8px #ff9800, 0 0 64px 16px #a259ff',
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      /> */}
+      {/* Card image */}
+      <img
+        src={mCard}
+        alt="MetaMask Card"
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'fill',
+          borderRadius: '18px',
+          background: 'transparent',
+          zIndex: 1,
+          boxShadow: '0 2px 16px rgba(0,0,0,0.15)',
+          padding: 0,
+          margin: 0,
+          display: 'block',
+        }}
+        draggable={false}
+      />
+    </div>
   );
 
   return (
@@ -107,7 +96,7 @@ const CreditCardAnimation: React.FC = () => {
             }}
             className="absolute left-1/4 transform -translate-x-1/2"
           >
-            <MetaMaskCard style={{}} />
+            <Card3D />
           </motion.div>
 
           {/* Right Card */}
@@ -120,7 +109,7 @@ const CreditCardAnimation: React.FC = () => {
             }}
             className="absolute right-1/4 transform translate-x-1/2"
           >
-            <MetaMaskCard style={{}} />
+            <Card3D />
           </motion.div>
 
           {/* Center floating elements */}
