@@ -99,42 +99,28 @@ const Landing: React.FC = () => {
     <div className="min-h-screen bg-black text-white relative">
       <AnimatedBackground />
       
-      {/* Responsive Logo and "CredX" at top left of hero section */}
+      {/* Logo and "CredX" at top left of hero section, with a tiny gap */}
       <div
         style={{
           position: 'absolute',
-          top: 16,
-          left: 16,
+          top: 32,
+          left: 32,
           zIndex: 20,
           display: 'flex',
           alignItems: 'center',
-          // Responsive adjustments
-          width: 'auto',
         }}
       >
-        <div
-          style={{
-            position: 'relative',
-            height: '64px',
-            width: '64px',
-            minHeight: '40px',
-            minWidth: '40px',
-          }}
-        >
+        <div style={{ position: 'relative', height: '96px', width: '96px' }}>
           <img
             src={glowingFox}
             alt="CredX Fox Logo"
             style={{
-              height: '100%',
-              width: '100%',
-              maxHeight: '64px',
-              maxWidth: '64px',
-              minHeight: '40px',
-              minWidth: '40px',
+              height: '96px',
+              width: '96px',
               objectFit: 'contain',
-              filter: 'drop-shadow(0 0 12px #ff7e5f)',
+              filter: 'drop-shadow(0 0 16px #ff7e5f)',
               background: 'transparent',
-              borderRadius: '12px',
+              borderRadius: '16px',
               position: 'absolute',
               left: 0,
               top: 0,
@@ -146,10 +132,10 @@ const Landing: React.FC = () => {
           <span
             style={{
               position: 'absolute',
-              left: '46px', // Small gap for mobile
+              left: '68px', // Tiny gap
               top: '50%',
               transform: 'translateY(-50%)',
-              fontSize: '1.1rem',
+              fontSize: '1.5rem',
               fontWeight: 700,
               letterSpacing: '0.05em',
               display: 'inline-block',
@@ -159,10 +145,6 @@ const Landing: React.FC = () => {
               zIndex: 2,
               pointerEvents: 'none',
               whiteSpace: 'nowrap',
-              // Responsive font size
-              maxWidth: '80vw',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
             }}
           >
             <span style={{ color: '#fff' }}>Cred</span>
@@ -178,30 +160,6 @@ const Landing: React.FC = () => {
           </span>
         </div>
       </div>
-      <style>
-        {`
-          @media (max-width: 600px) {
-            .hero-section-logo {
-              top: 8px !important;
-              left: 8px !important;
-            }
-            .hero-section-logo-img {
-              height: 40px !important;
-              width: 40px !important;
-              min-height: 32px !important;
-              min-width: 32px !important;
-              max-height: 40px !important;
-              max-width: 40px !important;
-              border-radius: 8px !important;
-            }
-            .hero-section-logo-text {
-              left: 30px !important;
-              font-size: 0.95rem !important;
-              max-width: 60vw !important;
-            }
-          }
-        `}
-      </style>
 
       {/* Hero Section with extra spacing above and below */}
       <section

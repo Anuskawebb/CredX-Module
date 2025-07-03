@@ -1,6 +1,10 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import mCard from '../assets/Mcard-removebg-preview.png'; // Import your new card image
+import leftCard from '../assets/leftCard-removebg-preview.png';
+import rightCard from '../assets/rightCard-removebg-preview.png';
+
+const CARD_RADIUS = 18;
 
 const CreditCardAnimation: React.FC = () => {
   const { scrollYProgress } = useScroll();
@@ -16,7 +20,7 @@ const CreditCardAnimation: React.FC = () => {
   const rightCardExitY = useTransform(scrollYProgress, [0.5, 0.7], [0, -200]);
   const cardsOpacity = useTransform(scrollYProgress, [0.6, 0.75], [1, 0]);
 
-  const Card3D = () => (
+  const Card3D = ({ image }: { image: string }) => (
     <div
       style={{
         width: '360px',
@@ -25,42 +29,45 @@ const CreditCardAnimation: React.FC = () => {
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
-        overflow: 'visible',
+        overflow: 'hidden',
         background: 'transparent',
         padding: 0,
         margin: 0,
+        borderRadius: `${CARD_RADIUS}px`,
         boxShadow: 'none',
       }}
     >
-      {/* Glowing border */}
-      {/* <div
+      {/* Glowing edge effect tightly hugging the card */}
+      <div
         style={{
           position: 'absolute',
-          top: '-16px',
-          left: '-16px',
-          width: 'calc(100% + 32px)',
-          height: 'calc(100% + 32px)',
-          borderRadius: '28px',
-          boxShadow: '0 0 32px 8px #ff9800, 0 0 64px 16px #a259ff',
-          zIndex: 0,
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          borderRadius: `${CARD_RADIUS}px`,
           pointerEvents: 'none',
+          zIndex: 2,
+          boxShadow:
+            '0 0 16px 4px #ff9800, 0 0 32px 8px #a259ff',
         }}
-      /> */}
+      />
       {/* Card image */}
       <img
-        src={mCard}
+        src={image}
         alt="MetaMask Card"
         style={{
           width: '100%',
           height: '100%',
-          objectFit: 'fill',
-          borderRadius: '18px',
+          objectFit: 'cover',
+          borderRadius: `${CARD_RADIUS}px`,
           background: 'transparent',
-          zIndex: 1,
-          boxShadow: '0 2px 16px rgba(0,0,0,0.15)',
+          zIndex: 3,
+          boxShadow: 'none',
           padding: 0,
           margin: 0,
           display: 'block',
+          position: 'relative',
         }}
         draggable={false}
       />
@@ -96,7 +103,7 @@ const CreditCardAnimation: React.FC = () => {
             }}
             className="absolute left-1/4 transform -translate-x-1/2"
           >
-            <Card3D />
+            <Card3D image={leftCard} />
           </motion.div>
 
           {/* Right Card */}
@@ -109,7 +116,7 @@ const CreditCardAnimation: React.FC = () => {
             }}
             className="absolute right-1/4 transform translate-x-1/2"
           >
-            <Card3D />
+            <Card3D image={rightCard} />
           </motion.div>
 
           {/* Center floating elements */}
