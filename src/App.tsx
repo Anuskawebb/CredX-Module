@@ -12,6 +12,7 @@ import Borrow from './pages/Borrow';
 import Repay from './pages/Repay';
 import Card from './pages/Card';
 import History from './pages/History';
+import AnimatedBackground from './components/AnimatedBackground';
 
 import '@rainbow-me/rainbowkit/styles.css';
 
@@ -32,24 +33,27 @@ function App() {
         >
           <Router>
             <div className="min-h-screen bg-black">
-              <Routes>
-                <Route path="/" element={<Landing />} />
-                <Route 
-                  path="/*" 
-                  element={
-                    <>
-                      <Navbar />
-                      <Routes>
-                        <Route path="/dashboard" element={<Dashboard />} />
-                        <Route path="/borrow" element={<Borrow />} />
-                        <Route path="/repay" element={<Repay />} />
-                        <Route path="/card" element={<Card />} />
-                        <Route path="/history" element={<History />} />
-                      </Routes>
-                    </>
-                  } 
-                />
-              </Routes>
+              <AnimatedBackground />
+              <main className="relative z-10">
+                <Routes>
+                  <Route path="/" element={<Landing />} />
+                  <Route 
+                    path="/*" 
+                    element={
+                      <>
+                        <Navbar />
+                        <Routes>
+                          <Route path="/dashboard" element={<Dashboard />} />
+                          <Route path="/borrow" element={<Borrow />} />
+                          <Route path="/repay" element={<Repay />} />
+                          <Route path="/card" element={<Card />} />
+                          <Route path="/history" element={<History />} />
+                        </Routes>
+                      </>
+                    } 
+                  />
+                </Routes>
+              </main>
             </div>
           </Router>
         </RainbowKitProvider>

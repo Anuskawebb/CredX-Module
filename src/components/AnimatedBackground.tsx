@@ -5,7 +5,7 @@ const AnimatedBackground: React.FC = () => {
   const particles = Array.from({ length: 50 }, (_, i) => i);
 
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
       {particles.map((particle) => (
         <motion.div
           key={particle}

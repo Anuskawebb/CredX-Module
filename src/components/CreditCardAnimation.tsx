@@ -26,49 +26,53 @@ const CreditCardAnimation: React.FC = () => {
         rotateY: 10,
         transition: { duration: 0.3 }
       }}
-      className={`relative w-72 sm:w-80 h-44 sm:h-48 rounded-2xl overflow-hidden shadow-2xl group ${className}`}
+      className={`relative w-80 sm:w-96 h-48 sm:h-56 rounded-2xl overflow-hidden shadow-2xl group ${className}`}
     >
-      {/* Background glow effect from corners */}
-      <div className="absolute -inset-4 opacity-60 group-hover:opacity-80 transition-opacity duration-300">
-        {/* Top-left corner glow */}
-        <div className="absolute top-0 left-0 w-24 h-24 bg-gradient-radial from-neon-orange/60 via-neon-orange/30 to-transparent rounded-full blur-xl" />
-        {/* Top-right corner glow */}
-        <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-radial from-neon-purple/60 via-neon-purple/30 to-transparent rounded-full blur-xl" />
-        {/* Bottom-left corner glow */}
-        <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-radial from-neon-glow/60 via-neon-glow/30 to-transparent rounded-full blur-xl" />
-        {/* Bottom-right corner glow */}
-        <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-radial from-neon-purple/60 via-neon-purple/30 to-transparent rounded-full blur-xl" />
+      {/* Enhanced background glow from edges */}
+      <div className="absolute -inset-8 opacity-70 group-hover:opacity-90 transition-opacity duration-300 pointer-events-none">
+        {/* Edge glows */}
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-40 h-12 bg-gradient-to-b from-neon-orange/60 to-transparent blur-xl" />
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-40 h-12 bg-gradient-to-t from-neon-purple/60 to-transparent blur-xl" />
+        <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-12 h-40 bg-gradient-to-r from-neon-glow/60 to-transparent blur-xl" />
+        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-12 h-40 bg-gradient-to-l from-neon-orange/60 to-transparent blur-xl" />
+        
+        {/* Corner glows */}
+        <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-radial from-neon-orange/70 via-neon-orange/30 to-transparent rounded-full blur-2xl" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-radial from-neon-purple/70 via-neon-purple/30 to-transparent rounded-full blur-2xl" />
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-radial from-neon-glow/70 via-neon-glow/30 to-transparent rounded-full blur-2xl" />
+        <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-radial from-neon-purple/70 via-neon-purple/30 to-transparent rounded-full blur-2xl" />
       </div>
       
-      {/* Main card container with enhanced glow */}
+      {/* Main card container */}
       <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden">
-        {/* Enhanced background glow */}
-        <div className="absolute -inset-2 bg-gradient-to-r from-neon-orange/40 via-neon-purple/40 to-neon-glow/40 rounded-2xl blur-lg opacity-70 group-hover:opacity-90 transition-opacity duration-300" />
+        {/* Card border glow */}
+        <div className="absolute -inset-1 bg-gradient-to-r from-neon-orange/60 via-neon-purple/60 to-neon-glow/60 rounded-2xl blur-sm opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
         
-        {/* MetaMask Card Image */}
-        <div className="relative z-20 w-full h-full rounded-2xl overflow-hidden">
+        {/* MetaMask Card Image - Rotated to horizontal */}
+        <div className="relative z-20 w-full h-full rounded-2xl overflow-hidden bg-transparent">
           <img 
-            src="/src/assets/image.png" 
+            src="/src/assets/MetamasterCard.webp" 
             alt="MetaMask Card"
-            className="w-full h-full object-cover rounded-2xl"
+            className="w-full h-full object-cover rounded-2xl transform rotate-90 scale-125"
             style={{
-              filter: 'drop-shadow(0 0 20px rgba(231, 111, 81, 0.4)) drop-shadow(0 0 40px rgba(123, 44, 191, 0.3))'
+              filter: 'drop-shadow(0 0 20px rgba(231, 111, 81, 0.6)) drop-shadow(0 0 40px rgba(123, 44, 191, 0.5))',
+              imageRendering: 'crisp-edges'
             }}
           />
         </div>
         
         {/* Glass overlay for holographic effect */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent rounded-2xl z-30" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent rounded-2xl z-30" />
         
         {/* Hover enhancement glow */}
-        <div className="absolute inset-0 bg-gradient-to-br from-neon-glow/0 via-neon-glow/10 to-neon-glow/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30" />
+        <div className="absolute inset-0 bg-gradient-to-br from-neon-glow/0 via-neon-glow/20 to-neon-glow/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30" />
         
         {/* Corner accent glows on hover */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
-          <div className="absolute top-2 left-2 w-4 h-4 bg-neon-orange/60 rounded-full blur-sm" />
-          <div className="absolute top-2 right-2 w-4 h-4 bg-neon-purple/60 rounded-full blur-sm" />
-          <div className="absolute bottom-2 left-2 w-4 h-4 bg-neon-glow/60 rounded-full blur-sm" />
-          <div className="absolute bottom-2 right-2 w-4 h-4 bg-neon-purple/60 rounded-full blur-sm" />
+          <div className="absolute top-4 left-4 w-4 h-4 bg-neon-orange/90 rounded-full blur-sm animate-pulse" />
+          <div className="absolute top-4 right-4 w-4 h-4 bg-neon-purple/90 rounded-full blur-sm animate-pulse" />
+          <div className="absolute bottom-4 left-4 w-4 h-4 bg-neon-glow/90 rounded-full blur-sm animate-pulse" />
+          <div className="absolute bottom-4 right-4 w-4 h-4 bg-neon-purple/90 rounded-full blur-sm animate-pulse" />
         </div>
       </div>
     </motion.div>

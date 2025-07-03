@@ -69,7 +69,10 @@ const Landing: React.FC = () => {
     }
   ];
 
-  const scrollToHowItWorks = () => {
+  const handleScrollToHowItWorks = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     const element = document.getElementById('how-it-works');
     if (element) {
       element.scrollIntoView({ 
@@ -80,11 +83,11 @@ const Landing: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white relative">
       <AnimatedBackground />
       
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 z-10">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -114,25 +117,32 @@ const Landing: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-20"
           >
-            <Link to="/dashboard">
+            <Link 
+              to="/dashboard" 
+              className="inline-block relative z-30"
+              style={{ pointerEvents: 'auto' }}
+            >
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Launch CredX Application"
-                className="bg-gradient-to-r from-neon-orange to-neon-purple px-8 py-4 rounded-lg font-semibold text-white hover:shadow-lg hover:shadow-neon-glow/25 transition-all flex items-center space-x-2"
+                className="bg-gradient-to-r from-neon-orange to-neon-purple px-8 py-4 rounded-lg font-semibold text-white hover:shadow-lg hover:shadow-neon-glow/25 transition-all flex items-center space-x-2 cursor-pointer"
+                style={{ pointerEvents: 'auto' }}
               >
                 <span>Launch App</span>
                 <ChevronRight className="w-5 h-5" />
               </motion.button>
             </Link>
+            
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={scrollToHowItWorks}
+              onClick={handleScrollToHowItWorks}
               aria-label="Scroll to How It Works section"
-              className="border border-glass-white px-8 py-4 rounded-lg font-semibold text-white hover:bg-glass-white hover:shadow-lg hover:shadow-neon-glow/15 transition-all"
+              className="border border-glass-white px-8 py-4 rounded-lg font-semibold text-white hover:bg-glass-white hover:shadow-lg hover:shadow-neon-glow/15 transition-all cursor-pointer relative z-30"
+              style={{ pointerEvents: 'auto' }}
             >
               How It Works
             </motion.button>
@@ -140,14 +150,14 @@ const Landing: React.FC = () => {
         </div>
 
         {/* Subtle background glow behind text */}
-        <div className="absolute inset-0 bg-gradient-to-r from-neon-orange/5 via-neon-purple/5 to-neon-glow/5 blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-r from-neon-orange/5 via-neon-purple/5 to-neon-glow/5 blur-3xl -z-10" />
       </section>
 
       {/* 3D Credit Card Animation Section */}
       <CreditCardAnimation />
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id="how-it-works" className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -188,7 +198,7 @@ const Landing: React.FC = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -224,7 +234,7 @@ const Landing: React.FC = () => {
       </section>
 
       {/* Product Preview Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id="dashboard-section" className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -254,11 +264,16 @@ const Landing: React.FC = () => {
                   <p className="text-gray-400">Coming Soon</p>
                 </div>
               </div>
-              <Link to="/dashboard">
+              <Link 
+                to="/dashboard" 
+                className="inline-block relative z-30"
+                style={{ pointerEvents: 'auto' }}
+              >
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-neon-purple to-neon-glow px-8 py-3 rounded-lg font-semibold text-white hover:shadow-lg hover:shadow-neon-purple/25 transition-all"
+                  className="bg-gradient-to-r from-neon-purple to-neon-glow px-8 py-3 rounded-lg font-semibold text-white hover:shadow-lg hover:shadow-neon-purple/25 transition-all cursor-pointer"
+                  style={{ pointerEvents: 'auto' }}
                 >
                   Try the App
                 </motion.button>
