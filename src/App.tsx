@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { WagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
-import { wagmiConfig } from './config/wagmi';
+import { config as wagmiConfig } from './config/wagmi';
 
 import Navbar from './components/Navbar';
 import Landing from './pages/Landing';
